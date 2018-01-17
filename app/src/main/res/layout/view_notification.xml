@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#333333">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:padding="8dp"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/chicken"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="跳一跳助手"
+            android:padding="8dp"
+            android:textSize="12sp"
+            android:textColor="#ffffff"/>
+        <TextView
+            android:layout_width="1dp"
+            android:layout_height="15dp"
+            android:background="#ffffff"/>
+    <TextView
+        android:id="@+id/start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:textSize="12sp"
+        android:drawablePadding="4dp"
+        android:drawableTop="@mipmap/start"
+        android:textColor="#efefef"
+        android:text="启动小助手"/>
+    </LinearLayout>
+</LinearLayout>

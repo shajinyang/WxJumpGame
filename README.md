@@ -5,7 +5,7 @@
 目前的辅助程序大致原理都是一样的，只是实现方式不同。
 
 #### 运行效果
-![](jumpgif.gif)
+![](jumpgif2.gif)![](jumpgif.gif)
 
 #### 原理
     1.截取当前屏幕
@@ -49,10 +49,10 @@ root之后一切就好办了，直接用service就能实现我们想要的功能
             int pixelBottomColor=0;//台面下顶点颜色
             int height = src.getHeight();
             int width = src.getWidth();
-            Point chessPoint=new Point();
-            Point tableTopPoint=new Point();
-            Point tableMiddlePoint=new Point();
-            Point tableBottomPoint=new Point();
+            Point chessPoint=new Point();//棋子坐标点
+            Point tableTopPoint=new Point();//目标跳台上顶点
+            Point tableMiddlePoint=new Point();//目标跳台中心点
+            Point tableBottomPoint=new Point();//目标跳台下顶点
             //寻找跳台上顶点
             searchTop:
             for (int y = height/4; y < 2*height/3; y++) {
@@ -123,9 +123,22 @@ root之后一切就好办了，直接用service就能实现我们想要的功能
     这边也是其他版本提供的思路，获取到上顶点后，因为跳一跳跳台的大小不会超过某一个值，所以直接从上顶点的y
     坐标加274往上扫描，颜色值与上顶点相同的点就是下顶点。这里的274大约是最大方块的对角线长度。
 
+计算距离s；确定触摸时间t
 
+因为距离和触摸时间是一个一次函数t=k*s，所以只需要确定k的值就行
 
+     float SpaceTimeConfig=0.92f;
+            Log.e("distance",(int)(SpaceTimeConfig*distance)+"");
+            try {
+                CommandExecution.execCommand("input swipe 100 100 100 100 "+(int)(SpaceTimeConfig*distance),true);
+            } catch (Exception e) {
+                e.printStackTrace();
+                Log.e("error",e.getMessage()+"");
+            }
+     我这边k的值取得0.92 （测试后，每次都跳的中心点）这个值试几次就可以调出来，当然你也可以自己计算出
+     不同的分辨率的屏幕需要调整一下
 
-
-
-
+#### 其他优化待优化的地方
+     1.图像识别的地方还可以优化，主要是跳台的上下顶点位置，某些特殊的纹路会识别失败（木纹之类的）
+     2.代码里的一些常量（k的系数，棋子高度，跳台的最大面宽等），也不需要手动替换，可以获取屏幕的分辨率来做适配
+     3.读取本地图像的权限问题，我没有做适配，因为测试用的魅族手机，6.0以上的权限不需要特别适配，如果是其他手机还要增加读取权限。
